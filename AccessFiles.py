@@ -3,14 +3,19 @@ import os
 import openpyxl
 #read file list
 #i is the index
-def folderfiles(fpath, i):
+def folderfiles(fpath, cd, i):
     #print(fpath)
     #list stored
     res = []
+    c = 0
     for item in os.listdir(fpath):
         if os.path.isfile(os.path.join(fpath, item)):
+            c += 1
             res.append(item)
-    return res[i]
+    if cd == 'c':
+        return c
+    elif cd == 'd' and i != 0:
+        return res[i]
 
 #fname with extension
 #hname is the header name it will locate it position(max 30 rows)
