@@ -7,6 +7,7 @@ def readsql(drive,servername,dbname, uname, pword, query, sm):
     cndb = pyodbc.connect(conscript)
     cursor = cndb.cursor()
     #stored proc query = 'exec sp_sproc(123, 'abc')'
+    cursor.fast_executemany = True
     cursor.execute(query)
     for item in cursor:
         if sm == 's':
@@ -22,5 +23,6 @@ def altersql(drive,servername,dbname, uname, pword, query, val):
     #print(conscript)
     cndb = pyodbc.connect(conscript)
     cursor = cndb.cursor()
+    cursor.fast_executemany = True
     cursor.execute(query, val)
     cndb.commit()
