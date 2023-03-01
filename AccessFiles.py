@@ -33,14 +33,20 @@ def excelhloc(fpath, fname, shtn, hname, hlcs, rw):
         # provides row of the header at max 30 row search
         for c in range(lc):
             for r in range(31):
-                #print(fsht.cell(row=r + 1, column=c + 1).value)
-                if str(fsht.cell(row=r + 1, column=c + 1).value) == str(hname):
+                if str(fsht.cell(row=r + 1, column=c + 1).value).strip() == str(hname):
                     ir = r + 1
                     return ir
+                elif str(fsht.cell(row=r + 1, column=c + 1).value).strip() != 'None':
+                    ir = r + 1
+                    return ir
+
     elif hlcs == 'c' and rw != 0:
         #provides column of the header
         for c in range(lc):
-            if str(fsht.cell(row=rw, column=c+1).value) == str(hname):
+            if str(fsht.cell(row=rw, column=c+1).value).strip() == str(hname):
+                ic = c + 1
+                return ic
+            elif str(fsht.cell(row=rw + 1, column=c + 1).value).strip() != 'None':
                 ic = c + 1
                 return ic
     elif hlcs == 'l':
