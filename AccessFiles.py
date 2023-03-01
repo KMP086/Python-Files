@@ -38,10 +38,9 @@ def excelhloc(fpath, fname, shtn, hname, hlcs, rw):
                     return ir
                 elif str(fsht.cell(row=r + 1, column=c + 1).value).strip() != 'None':
                     ir = r + 1
-                    return ir
-
     elif hlcs == 'c' and rw != 0:
         #provides column of the header
+        #if no items found default to next column number
         for c in range(lc):
             if str(fsht.cell(row=rw, column=c+1).value).strip() == str(hname):
                 ic = c + 1
