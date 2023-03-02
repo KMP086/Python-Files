@@ -31,21 +31,24 @@ def excelhloc(fpath, fname, shtn, hname, hlcs, rw):
     #print(hname)
     if hlcs == 'h':
         # provides row of the header at max 30 row search
+        #it returns 'None' if theres no value
         for c in range(lc):
             for r in range(31):
-                if str(fsht.cell(row=r + 1, column=c + 1).value).strip() == str(hname):
+                if str(fsht.cell(row=r + 1, column=c + 1).value).strip() != 'None':
+                    ir = r + 1
+                    print('No value skip to next loop ' + ir)
+                elif str(fsht.cell(row=r + 1, column=c + 1).value).strip() == str(hname):
                     ir = r + 1
                     return ir
-                elif str(fsht.cell(row=r + 1, column=c + 1).value).strip() != 'None':
-                    ir = r + 1
+
     elif hlcs == 'c' and rw != 0:
         #provides column of the header
-        #if no items found default to next column number
+        #it returns 'None' if theres no value
         for c in range(lc):
-            if str(fsht.cell(row=rw, column=c+1).value).strip() == str(hname):
+            if str(fsht.cell(row=rw + 1, column=c + 1).value).strip() != 'None':
                 ic = c + 1
-                return ic
-            elif str(fsht.cell(row=rw + 1, column=c + 1).value).strip() != 'None':
+                print('No value skip to next loop ' + ic)
+            elif str(fsht.cell(row=rw, column=c+1).value).strip() == str(hname):
                 ic = c + 1
                 return ic
     elif hlcs == 'l':
