@@ -34,23 +34,22 @@ def excelhloc(fpath, fname, shtn, hname, hlcs, rw):
         #it returns 'None' if theres no value
         for c in range(lc):
             for r in range(31):
-                if str(fsht.cell(row=r + 1, column=c + 1).value).strip() != 'None':
-                    ir = r + 1
-                    print('No value skip to next loop ' + str(ir))
-                elif str(fsht.cell(row=r + 1, column=c + 1).value).strip() == str(hname):
+                #print(str(fsht.cell(row=r + 1, column=c + 1).value).strip())
+                if str(fsht.cell(row=r + 1, column=c + 1).value).strip() == str(hname):
                     ir = r + 1
                     return ir
+                elif str(fsht.cell(row=r + 1, column=c + 1).value).strip() != None:
+                    ir = r + 1
 
     elif hlcs == 'c' and rw != 0:
         #provides column of the header
         #it returns 'None' if theres no value
         for c in range(lc):
-            if str(fsht.cell(row=rw + 1, column=c + 1).value).strip() != 'None':
-                ic = c + 1
-                print('No value skip to next loop ' + str(ic))
-            elif str(fsht.cell(row=rw, column=c+1).value).strip() == str(hname):
+            if str(fsht.cell(row=rw, column=c+1).value).strip() == str(hname):
                 ic = c + 1
                 return ic
+            elif str(fsht.cell(row=rw + 1, column=c + 1).value).strip() != None:
+                ic = c + 1
     elif hlcs == 'l':
         lr = wb[sht].max_row
         return lr
