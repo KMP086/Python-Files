@@ -36,7 +36,7 @@ def excelhloc(fpath, fname, shtn, hname, hlcs, rw):
             for r in range(31):
                 if str(fsht.cell(row=r + 1, column=c + 1).value).strip() != 'None':
                     ir = r + 1
-                    print('No value skip to next loop ' + ir)
+                    print('No value skip to next loop ' + str(ir))
                 elif str(fsht.cell(row=r + 1, column=c + 1).value).strip() == str(hname):
                     ir = r + 1
                     return ir
@@ -47,7 +47,7 @@ def excelhloc(fpath, fname, shtn, hname, hlcs, rw):
         for c in range(lc):
             if str(fsht.cell(row=rw + 1, column=c + 1).value).strip() != 'None':
                 ic = c + 1
-                print('No value skip to next loop ' + ic)
+                print('No value skip to next loop ' + str(ic))
             elif str(fsht.cell(row=rw, column=c+1).value).strip() == str(hname):
                 ic = c + 1
                 return ic
