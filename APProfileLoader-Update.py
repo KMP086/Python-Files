@@ -21,7 +21,7 @@ class approfile:
     sref = 2 #Starting df row/ reference row
     sqlcred = ('{SQL Server}', 'Server Name', 'Data Base', 'USER NAME', 'PASSWORD') # SQl Credentials
     #No of headers to display////////////////////////////////////////////////////////////////////////
-    cquery = 'select count(HeaderName) from [SQL_MNLDB].[dbo].[tblAPHeaderRef]'
+    cquery = 'select count(HeaderName) from [Data Base].[dbo].[Table]'
     csql = readsql(*sqlcred, cquery, 's')
     #////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -29,7 +29,7 @@ class approfile:
         fname = folderfiles(fpath, 'd', f)
 
         for cl in range(int(csql)):
-            query = 'Select HeaderName from SQL_MNLDB.dbo.tblAPHeaderRef where ID =' + str(cl + 1)
+            query = 'Select HeaderName from [Data Base].[dbo].[Table] where ID =' + str(cl + 1)
             sitem = readsql(*sqlcred, query, 's').strip()
             #print(sitem, len(sitem))
             sht = excelhloc(fpath, fname, 0, sitem, 's', 0)
@@ -59,7 +59,7 @@ class approfile:
         #header Change///////////////////////////////////////////////////////////////////////////////
         w = 0
         for h in range(int(csql)):
-                hq = 'Select QueryHeader from SQL_MNLDB.dbo.tblAPHeaderRef where ID =' + str(h + 1)
+                hq = 'Select QueryHeader from [Data Base].[dbo].[Table] where ID =' + str(h + 1)
                 hitem = readsql(*sqlcred, hq, 's').strip()
                 #print(ih[h])
                 if ih[h] == None:
@@ -82,7 +82,7 @@ class approfile:
         p = math.trunc(l/500)
         if p == 0:
             records = setdf[sqlcol].iloc[sref:l,]
-            bulksql(*sqlcred, records, 'tblAPProfile', 'append')
+            bulksql(*sqlcred, records, 'Table', 'append')
         if p >= 0:
             for y in range(p):
                 v = 502 * (y + 1)
@@ -90,13 +90,13 @@ class approfile:
                     s = 2
                     v = 502
                 records = setdf[sqlcol].iloc[s:v,]
-                bulksql(*sqlcred,  records, 'tblAPProfile', 'append')
+                bulksql(*sqlcred,  records, 'Table', 'append')
                 s = v
                 i = l - v
 
                 if i < 502:
                     v = l
                     records = setdf[sqlcol].iloc[s:v,]
-                    bulksql(*sqlcred, records, 'tblAPProfile', 'append')
+                    bulksql(*sqlcred, records, 'Table', 'append')
 
     print("Process Complete!!!")
