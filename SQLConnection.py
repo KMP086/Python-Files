@@ -1,24 +1,35 @@
 #pip install pyodbc
 #pip install sqlalchemy
 # pip install pandas
+
 import urllib.parse
 import pandas as pd
 import pyodbc
 from sqlalchemy import *
 
 #s for single data or m for multiple data or n for no display
+
 def readsql(drive,servername,dbname, uname, pword, query, sm):
+    w = 0
     conscript = "Driver=" + drive + ";Server=" + servername + ";Database=" + dbname + ";UID=" + uname + ";PWD=" + pword
     #print(conscript)
     cndb = pyodbc.connect(conscript)
     cursor = cndb.cursor()
     #stored proc query = 'exec sp_sproc(123, 'abc')'
-    cursor.execute(query)
-    for item in cursor:
-        if sm == 's':
+    result = cursor.execute(query)
+    if sm == 's':
+        for item in result:
+            #print(item)
             return item[0]
-        elif sm == 'm':
-            return item
+    elif sm == 'm':
+        for row in result.fetchall():
+            w = w + 1
+            if w == 1:
+                i = [str(row[0]).strip()]
+            elif w > 1:
+                i.insert(w, str(row[0]).strip())
+        #print(i)
+        return i
 
 #for insert into or update set (single entry only)
 def altersql(drive,servername,dbname, uname, pword, query, val):
