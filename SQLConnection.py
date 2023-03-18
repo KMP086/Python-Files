@@ -1,3 +1,4 @@
+#upgrade -m pip install --upgrade 'sqlalchemy<2.0'
 #pip install pyodbc
 #pip install sqlalchemy
 # pip install pandas
@@ -5,6 +6,7 @@
 import urllib.parse
 import pandas as pd
 import pyodbc
+import sqlalchemy
 from sqlalchemy import *
 
 #s for single data or m for multiple data or n for no display
@@ -54,4 +56,15 @@ def bulksql(drive,servername,dbname, uname, pword, dataf, sqltable, sqltype):
     print(df)
     df.to_sql(con=engine, name=sqltable, if_exists=sqltype, index=False, chunksize=1000)
 
+
+#bulk display select from where
+def bulkdisql(drive, servername, dbname, uname, pword, sqlquery):
+    sqlparam = urllib.parse.quote_plus(f"Driver={drive};Server={servername};Database={dbname};UID={uname};PWD={pword};")
+    engine = sqlalchemy.create_engine("mssql+pyodbc:///?odbc_connect={}".format(sqlparam), echo=True)
+    conn = engine.connect()
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.max_rows', None)
+    resultset = pd.read_sql(sqlalchemy.text(sqlquery), conn)
+    #print(resultset)
+    return(resultset)
 

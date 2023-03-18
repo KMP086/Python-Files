@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DSV - File Consolidator</title>
+
+        <link href="https://fonts.googleapis.com/css?family=Karla:400" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <link href='https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
+        <script src="https://cdn.tailwindcss.com"></script>
+
+    </head>
+    <body>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    
+    <h1 class="grid place-items-center mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">
+        Excel to SQL Database 
+      </h1>
+    <div class="grid place-items-center">
+      <form method="post" action=""
+      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            Folder Location:  {{wr}}
+          </label>
+            <!--textbox-->
+          <input class="shadow appearance-none border rounded w-full border border-gray-700 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          name="ii"
+          type="text" 
+          placeholder="Input 1">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm  font-bold mb-2">
+            Process Type:
+          </label>
+          <!--Drop Down-->
+          <select name="ptype" id="ptype" type="text" class="block w-full border border-gray-700 py-2 px-3 text-gray-700 text-sm font-bold mb-2">
+              {% for l in ql %}
+              <OPTION value={{l}}>{{l}}</OPTION>
+              {% endfor %}
+          </select>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <button name="submit" type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+            Submit
+          </button>
+        </div>
+      </form>
+      <div>
+            {% for tbl in tables %}
+            {{tbl|safe}}
+            {% endfor %}
+      </div>
+    </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        $('#dtbl').DataTable();
+    });
+    </script>
+
+    </body>
+</html>

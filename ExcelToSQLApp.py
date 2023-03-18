@@ -8,15 +8,15 @@ import datetime
 import pandas as pd
 import re
 
-class approfile:
+def approfile(floc, ptype):
     #Setup Variables//////////////////////////////////////////////////////////////////////////////////////////
-    fpath = 'C:\\Users\\Name\\OneDrive - DSV\\Desktop\\folder\\folder\\'
+    fpath = str(floc.replace('\\', '/')).strip() + '\\'
     hrf = 0 #row that will be set as column name
     sref = 2 #Starting df row/ reference row
     sqlcred = ('{SQL Server}', 'ServerName', 'Database', 'UserName', 'Password') # SQl Credentials
     sqlcolname = 'HeaderName'
     #Query will be used in the table//////////////////////////////////////////////////////////////////////////
-    RepName = 'AP Profile'
+    RepName = str(ptype)
     itemqry = str("Select QueryHeader from Database.dbo.Table Where ReportName = '" + RepName + "'")
     sqlcol = readsql(*sqlcred, itemqry, 'm')
     fsqlcol = []
