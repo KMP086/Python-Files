@@ -10,7 +10,7 @@ import re
 
 class approfile:
     #Setup Variables//////////////////////////////////////////////////////////////////////////////////////////
-    fpath = 'C:\\Users\\Kim.Pambid\\OneDrive - DSV\\Desktop\CW1 Mena\\AP Profile CW1\\'
+    fpath = 'C:\\Users\\Kim.Pambid\\OneDrive\\Desktop\CW1\\AP Profile\\'
     hrf = 0 #row that will be set as column name
     sref = 2 #Starting df row/ reference row
     sqlcred = ('{SQL Server}', 'ServerName', 'Database', 'UserName', 'Password') # SQl Credentials
