@@ -10,7 +10,7 @@ import pandas as pd
 
 # connsql(drive,servername,dbname, uname, pword, query, smn)
 class approfile:
-    fpath = 'C:\\Users\\Kim.Pambid\\OneDrive - DSV\\********\\********\\'
+    fpath = 'C:\\Users\\Kim.Pambid\\OneDrive\\********\\********\\'
     fcount = folderfiles(fpath, 'c', 0)
     ir = []
     ic = []
