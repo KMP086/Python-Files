@@ -12,55 +12,114 @@
     <body>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    
-    <h1 class="grid place-items-center mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">
+    <br><!-- Space top-->
+    <h1 class="mx-10 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">
         Excel to SQL Database 
-      </h1>
-    <div class="grid place-items-center">
-      <form method="post" action=""
-      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2">
-            Folder Location:  {{wr}}
-          </label>
-            <!--textbox-->
-          <input class="shadow appearance-none border rounded w-full border border-gray-700 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          name="ii"
-          type="text" 
-          placeholder="Input 1">
+    </h1>
+    <br><!-- Space inbetween-->
+    <div class="grid grid-cols-12">
+        <div class="col-span-2">
+            <div class="mx-4 w-30">
+              <form method="post" action=""
+              class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                    <div class="mb-4">
+                      <label class="block text-gray-700 text-xl font-extrabold mb-2">
+                        Folder Location:  {{wr}}
+                      </label>
+                        <!--textbox-->
+                      <input class="shadow appearance-none border rounded w-full border border-gray-700 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      name="ii"
+                      type="text"
+                      placeholder="Input 1">
+                    </div>
+                    <div class="mb-4">
+                      <label class="block text-gray-700 text-xl font-extrabold mb-2">
+                        Process Type:
+                      </label>
+                      <!--Drop Down-->
+                      <select name="ptype" id="ptype" type="text" class="shadow appearance-none  block w-full border border-gray-700 py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline">
+                          {% for l in ql %}
+                          <OPTION value={{l}} {% if l == rtype %} selected {% endif %} >{{l}}</OPTION>
+                          {% endfor %}
+                      </select>
+                    </div>
+
+                    <!-- Dates Drop Down-->
+                    <div class="mb-4">
+                        <table>
+                            <tr>
+                                <!-- Year -->
+                                <td><label class="block text-gray-700 text-xl font-extrabold mb-2">Year:&nbsp</label></td>
+                                <td>
+                                    <select name="dyear" id="dyear" type="text" class="shadow appearance-none  block w-full border border-gray-700 py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline">
+                                        {% for y in range(tdate) %}
+                                            {% set dy = 2015 + y %}
+                                            <OPTION value={{dy}}>{{dy}}</OPTION>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                                <!-- Month -->
+                                <td><label class="block text-gray-700 text-xl font-extrabold mb-2"> &nbsp Month: &nbsp </label></td>
+                                <td>
+                                     <select name="dmonth" id="dmonth" type="text" class="shadow appearance-none  block w-full border border-gray-700 py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline">
+                                         <OPTION value=1> January  </OPTION>
+                                         <OPTION value=2> February </OPTION>
+                                         <OPTION value=3> March </OPTION>
+                                         <OPTION value=4> April </OPTION>
+                                         <OPTION value=5> May </OPTION>
+                                         <OPTION value=6> June </OPTION>
+                                         <OPTION value=7> July </OPTION>
+                                         <OPTION value=8> August </OPTION>
+                                         <OPTION value=9> September </OPTION>
+                                         <OPTION value=10> October </OPTION>
+                                         <OPTION value=11> November </OPTION>
+                                         <OPTION value=12> December </OPTION>
+                                     </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <button name="submit" type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                        Submit / View
+                        </button>
+                    </div>
+              </form>
+            </div>
         </div>
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm  font-bold mb-2">
-            Process Type:
-          </label>
-          <!--Drop Down-->
-          <select name="ptype" id="ptype" type="text" class="block w-full border border-gray-700 py-2 px-3 text-gray-700 text-sm font-bold mb-2">
-              {% for l in ql %}
-              <OPTION value={{l}}>{{l}}</OPTION>
-              {% endfor %}
-          </select>
+    <!------Data Table----->
+        <div class="col-span-8 items-center mx-4" >
+           <!-- <table id='dtbl'></table>--><!--Json-->
+                {% for tbl in tables %}
+                    {{tbl|safe}}
+                {% endfor %}
         </div>
 
-        <div class="flex items-center justify-between">
-          <button name="submit" type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-            Submit
-          </button>
+        <!-- loading screen -->
+        <div id='loader' style='display: none;'>
+            <img src='C:\Users\Kim.Pambid\OneDrive - DSV\Desktop\CW1 Mena\FOREX Python\DSV Python Library\styles\static\image\loader.png'>
+            <b>Loading...</b>
         </div>
-      </form>
-      <div>
-            {% for tbl in tables %}
-            {{tbl|safe}}
-            {% endfor %}
-      </div>
+        </div>
     </div>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script>
-    $(document).ready(function () {
-        $('#dtbl').DataTable();
-    });
+        $(document).ready(function () {
+            $('#dtbl').DataTable(
+                {
+                    autoWidth: true,
+                    scrollY: "600px",
+                    scrollX: true,
+                    scrollCollapse: true,
+                    paging: true,
+                    columnDefs: [{ width: '20%', targets: 2, className: 'dt-left', className: 'dt-head-left'}],
+                    fixedColumns: true
+                });
+        });
     </script>
-
     </body>
+
 </html>

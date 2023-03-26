@@ -8,8 +8,9 @@ import datetime
 import pandas as pd
 
 # connsql(drive,servername,dbname, uname, pword, query, smn)
-class approfile:
-    fpath = 'C:\\Users\\Kim.Pambid\\Desktop\\Report Folder A\\Report Folder B\\'
+def appForex(floc):
+    sqlcred = ('Driver', 'Server', 'Database', 'UID', 'PWD') # SQl Credentials
+    fpath = str(floc.replace('\\', '/')).strip() + '\\'
     fcount = folderfiles(fpath, 'c', 0)
     p = 0
     val = []
@@ -39,7 +40,7 @@ class approfile:
             records = df.iloc[0:l, ]
             records.insert(0, 'DB_Date', tdate)
             records.insert(1, 'F_Name', fn)
-            bulksql('Driver', 'Server', 'Database', 'UID', 'PWD', records, 'tblAPFOREX', 'append')
+            bulksql(*sqlcred, records, 'tblAPFOREX', 'append')
         if p >= 0:
             for y in range(p):
                 v = 502 * (y + 1)
@@ -49,7 +50,7 @@ class approfile:
                 records = df.iloc[s:v, ]
                 records.insert(0, 'DB_Date', tdate)
                 records.insert(1, 'F_Name', fn)
-                bulksql('Driver', 'Server', 'Database', 'UID', 'PWD',  records, 'tblAPFOREX', 'append')
+                bulksql(*sqlcred,  records, 'tblAPFOREX', 'append')
                 s = v
                 i = l - v
 
@@ -58,6 +59,6 @@ class approfile:
                     records = df.iloc[s:v, ]
                     records.insert(0, 'DB_Date', tdate)
                     records.insert(1, 'F_Name', fn)
-                    bulksql('Driver', 'Server', 'Database', 'UID', 'PWD', records, 'tblAPFOREX', 'append')
+                    bulksql(*sqlcred, records, 'tblAPFOREX', 'append')
 
     print("Process Complete!!!")

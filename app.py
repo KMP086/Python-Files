@@ -1,7 +1,9 @@
 #pip install pytailwindcss
+#pip install -U selenium
 from flask import Flask
 from waitress import serve
 from views import display
+from selenium import webdriver
 #reference:https://www.youtube.com/watch?v=kng-mJJby8g
 #Activate website or localhost
 app = Flask(__name__)

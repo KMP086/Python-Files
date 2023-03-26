@@ -10,10 +10,10 @@ import re
 
 class approfile:
     #Setup Variables//////////////////////////////////////////////////////////////////////////////////////////
-    fpath = 'C:\\Users\\Kim.Pambid\\OneDrive\\Desktop\CW1\\AP Profile\\'
+    fpath = 'C:\\Users\\Kim.Pambid\\OneDrive\\Desktop\\Report Folder\\'
     hrf = 0 #row that will be set as column name
     sref = 2 #Starting df row/ reference row
-    sqlcred = ('{SQL Server}', 'ServerName', 'Database', 'UserName', 'Password') # SQl Credentials
+    sqlcred = ('Driver', 'Server', 'Database', 'UID', 'PWD') # SQl Credentials
     sqlcolname = 'HeaderName'
     #Query will be used in the table//////////////////////////////////////////////////////////////////////////
     RepName = 'AP Profile'
@@ -43,7 +43,7 @@ class approfile:
     #//////////////////////////////////////////////////////////////////////////////////////////////////////////
     for f in range(fcount):
         fname = folderfiles(fpath, 'd', f)
-        query = 'Select HeaderName from Database.dbo.Table where ID = 1'
+        query = 'Select HeaderName from DataBase.dbo.Table where ID = 1'
         fitem = readsql(*sqlcred, query, 's').strip()
         sht = excelhloc(fpath, fname, 0, fitem, 's', 0)
         l = excelhloc(fpath, fname, 0, fitem, 'l', 0)

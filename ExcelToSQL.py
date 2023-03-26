@@ -13,7 +13,7 @@ class approfile:
     fpath = 'C:\\Users\\Name\\OneDrive\\Desktop\\folder\\folder\\'
     hrf = 0 #row that will be set as column name
     sref = 2 #Starting df row/ reference row
-    sqlcred = ('{SQL Server}', 'ServerName', 'Database', 'UserName', 'Password') # SQl Credentials
+    sqlcred = ('Driver', 'Server', 'Database', 'UID', 'PWD') # SQl Credentials
     sqlcolname = 'HeaderName'
     #Query will be used in the table//////////////////////////////////////////////////////////////////////////
     RepName = 'AP Profile'
